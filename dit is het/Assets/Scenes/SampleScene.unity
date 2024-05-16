@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 65845199}
   - component: {fileID: 65845200}
   - component: {fileID: 65845201}
+  - component: {fileID: 65845202}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -220,7 +221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65845195}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5337f4fb18c8bb94d9c55b11d0851449, type: 3}
   m_Name: 
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orientation: {fileID: 565496930}
   playerCam: {fileID: 587131595}
-  dashForce: 20
+  dashForce: 13
   dashUpwardForce: 0
   maxDashYSpeed: 15
   dashDuration: 0.25
@@ -276,6 +277,70 @@ MonoBehaviour:
   resetVel: 1
   dashCd: 1.5
   dashKey: 101
+--- !u!114 &65845202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65845195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b0a2bbacd4e1f54aaca2eb1678d9fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 0}
+  orientation: {fileID: 565496930}
+  lockLook: 0
+  energy: 0
+  energyRegen: 0
+  health: 0
+  regen: 0
+  inputVector: {x: 0, y: 0, z: 0}
+  moveSpeed: 1000
+  baseSpeed: 20
+  grounded: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 256
+  counterMovement: 0.175
+  maxSlopeAngle: 35
+  slideForce: 300
+  slideCounterMovement: 0.2
+  crouchGravityMultiplier: 0
+  jumpForce: 140
+  startDoubleJumps: 1
+  x: 0
+  y: 0.15
+  airForwardForce: 0
+  dashForce: 20
+  dashCooldown: 0.35
+  dashTime: 0
+  maxRocketTime: 0
+  rocketForce: 0
+  flashCooldown: 0
+  flashRange: 0
+  maxFlashesLeft: 0
+  flashesLeft: 3
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  isWallRight: 0
+  isWallLeft: 0
+  maxWallrunTime: 0
+  wallrunForce: 0
+  maxWallSpeed: 0
+  isWallRunning: 0
+  maxWallRunCameraTilt: 0
+  wallRunCameraTilt: 0
+  climbForce: 0
+  maxClimbSpeed: 0
+  whatIsLadder:
+    serializedVersion: 2
+    m_Bits: 0
+  speedRecord: 0
+  baseVelocityDisplay: {fileID: 0}
+  currentVelocityDisplay: {fileID: 0}
 --- !u!1 &517947653
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,13 +491,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32d55f39ee73fe545a06f9bdc3671fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 5
-  sensY: 5
+  sensX: 10
+  sensY: 10
   multiplier: 0.1
   orientation: {fileID: 565496930}
   camHolder: {fileID: 517947655}
   useFluentFov: 0
-  pm: {fileID: 0}
+  pm: {fileID: 65845200}
   rb: {fileID: 65845198}
   cam: {fileID: 587131598}
   minMovementSpeed: 0
@@ -1250,8 +1315,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 1279139132}
   - {fileID: 65845196}
-  - {fileID: 517947655}
   - {fileID: 808730690}
+  - {fileID: 517947655}
   - {fileID: 1078747069}
   - {fileID: 1543927701}
   - {fileID: 1442564885}
