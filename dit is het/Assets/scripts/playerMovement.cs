@@ -129,7 +129,7 @@ public class playerMovement : MonoBehaviour
         if (!lockLook) Look();
         CheckForWall();
 
-        EnergyManager();
+       
 
         //Stuff
         if (Input.GetKeyDown(KeyCode.L)) SceneManager.LoadScene(1);
@@ -159,22 +159,22 @@ public class playerMovement : MonoBehaviour
         if (!isWallRunning && !rocketActive && energy < 100)
             energy += energyRegen * Time.deltaTime;
 
-        energyBar.UpdateBar(energy, 100f);
+        
     }
     private void MyInput()
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
-        crouching = Input.GetKey(KeyCode.LeftShift);
+        crouching = Input.GetKey(KeyCode.P);
 
         //Calculating input vector
         //inputVector = new Vector3(x, 0, y);
 
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.P))
             StartCrouch();
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.P))
             StopCrouch();
 
         //Double Jumping
