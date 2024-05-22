@@ -261,7 +261,7 @@ MonoBehaviour:
   flashesLeft: 3
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   isWallRight: 0
   isWallLeft: 0
   maxWallrunTime: 0
