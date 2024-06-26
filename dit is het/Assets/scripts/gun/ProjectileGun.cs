@@ -2,14 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-/// Thanks for downloading my projectile gun script! :D
-/// Feel free to use it in any project you like!
-/// 
-/// The code is fully commented but if you still have any questions
-/// don't hesitate to write a yt comment
-/// or use the #coding-problems channel of my discord server
-/// 
-/// Dave
+
 public class ProjectileGun : MonoBehaviour
 {
     public bool shootingEnabled = true;
@@ -17,7 +10,7 @@ public class ProjectileGun : MonoBehaviour
     [Header("Attatch your bullet prefab")]
     public GameObject bullet;
 
-    //Gun stats
+    //Gun statestieken
     public float shootForce, upwardForce;
     public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
@@ -28,16 +21,14 @@ public class ProjectileGun : MonoBehaviour
     public Rigidbody playerRb;
     public float recoilForce;
 
-    //some bools
+    
     bool shooting, readyToShoot, reloading;
 
     public Camera fpsCam;
     public GameObject muzzleFlash;
     public Transform attackPoint;
 
-    //Show bullet amount
-    //public CamShake camShake;
-    //public float camShakeMagnitude, camShakeDuration;
+    //hoeveel kogels je hebt
     public TextMeshProUGUI text;
 
     public bool allowInvoke = true;
@@ -54,16 +45,16 @@ public class ProjectileGun : MonoBehaviour
     }
     private void MyInput()
     {
-        //Input
+        //als je op de mous drukt dan schiet het
         if (allowButtonHold) shooting = Input.GetKey(KeyCode.Mouse0);
         else shooting = Input.GetKeyDown(KeyCode.Mouse0);
 
         if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading) Reload();
 
-        //Shoot
+        //
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0){
             bulletsShot = bulletsPerTap;
-            Shoot(); //Function has to be after bulletsShot = bulletsPerTap
+            Shoot(); 
         }
     }
     private void Shoot()
@@ -72,17 +63,17 @@ public class ProjectileGun : MonoBehaviour
 
         readyToShoot = false;
 
-        //Find the hit position using a raycast
+        //raycast gebruiken om de positie van de hit te vinden
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
-        //Check if the ray hits something
+        //check of the ray iets heeft gehit
         Vector3 targetPoint;
         if (Physics.Raycast(ray, out hit))
             targetPoint = hit.point;
         else
             targetPoint = ray.GetPoint(75);
 
-        //Calculate direction
+        // directie uitrekenen
         Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
 
         //Spread
@@ -90,7 +81,7 @@ public class ProjectileGun : MonoBehaviour
         float y = Random.Range(-spread, spread);
         float z = Random.Range(-spread, spread);
 
-        //Calc Direction with Spread
+        // directie met spread uitrekenen
         Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, z);
 
         //Instantiate bullet/projectile
@@ -100,13 +91,12 @@ public class ProjectileGun : MonoBehaviour
         //AddForce
         currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
         currentBullet.GetComponent<Rigidbody>().AddForce(fpsCam.transform.up * upwardForce, ForceMode.Impulse);
-        //Activate bullet
+        //bullet activeren
         if (currentBullet.GetComponent<CustomProjectiles>()) currentBullet.GetComponent<CustomProjectiles>().activated = true;
 
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
-        //Shake Camera
-        //camShake.StartCoroutine(camShake.Shake(camShakeDuration, camShakeMagnitude));
+        
 
         bulletsLeft--;
         bulletsShot--;
@@ -116,7 +106,7 @@ public class ProjectileGun : MonoBehaviour
             Invoke("ShotReset", timeBetweenShooting);
             allowInvoke = false;
 
-            //Add recoil force to player (should only be called once)
+            //recoil aan player toeveogen
             playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
         }
 
